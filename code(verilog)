@@ -1,0 +1,34 @@
+module systolic_pe_optimized #(
+    parameter DATA_WIDTH = 8,
+    parameter ACCUM_WIDTH = 16
+)(
+    input  wire                     clk,
+    input  wire                     rst_n,      
+    input  wire [DATA_WIDTH-1:0]    w_in,       
+    input  wire [DATA_WIDTH-1:0]    x_in,       
+    input  wire [ACCUM_WIDTH-1:0]   partial_sum_in,
+    
+    output reg  [DATA_WIDTH-1:0]    x_out,     
+    output reg  [ACCUM_WIDTH-1:0]   y_out       
+);
+
+    
+    reg [DATA_WIDTH-1:0] weight_buffer;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            weight_buffer <= {DATA_WIDTH{1'b0}};
+            x_out         <= {DATA_WIDTH{1'b0}};
+            y_out         <= {ACCUM_WIDTH{1'b0}};
+        end else begin
+           
+            weight_buffer <= w_in; 
+            
+            x_out <= x_in;
+            
+           
+            y_out <= partial_sum_in + (x_in * weight_buffer);
+        end
+    end
+
+endmodule
