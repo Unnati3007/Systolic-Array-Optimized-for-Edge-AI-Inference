@@ -1,5 +1,5 @@
 # Systolic-Array-Optimized-for-Edge-AI-Inference
-# Systolic Array Optimized for Edge AI Inference
+
 
 A hardware accelerator for deep neural network inference, implemented in **Verilog** on FPGA. Uses a **16×16 systolic array** with a weight-stationary dataflow to accelerate matrix multiplication — the core operation in every DNN layer — achieving **128 GOPS** peak throughput at **250 MHz** with **22% lower power** than floating-point FPGA baselines.
 
